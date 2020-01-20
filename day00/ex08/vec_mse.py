@@ -10,7 +10,7 @@ def vec_mse(y, y_hat):
 	if y.shape != y_hat.shape:
 		return None
 
-	return dot(y_hat -y, y_hat - y) / y.size
+	return dot(y_hat - y, y_hat - y) / y.size
 
 X = np.array([0, 15, -9, 7, 12, 3, -21])
 Y = np.array([2, 14, -13, 5, 12, 4, -19])
