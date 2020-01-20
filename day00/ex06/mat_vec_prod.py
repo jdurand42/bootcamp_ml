@@ -4,16 +4,18 @@ from dot import dot
 def mat_vec_prod(x, y):
 	if x.size == 0 or y.size == 0:
 		return None
-	if x.shape[1] != y.shape[0]:
-		return None
-
-	res_n = np.zeros((x.shape[0], 1))
+	#if x.shape[1] != y.shape[0]:
+	#	print(x.shape, y.shape)
+	#	return None
+	array = []
+	#print("here")
+	#res_n = np.zeros((x.shape[0], 1))
 	for i in range(0,x.shape[0]):
-		res_n[i] = dot(x[i], y.reshape(y.shape[0]))
-	return res_n
+		array.append(dot(x[i], y))
+	return np.array(array)
 
 
-#W = np.array(
+#W = np.array([
 #    [ -8, 8, -6, 14, 14, -9, -4],
 #    [ 2, -11, -2, -11, 14, -2, 14],
 #    [-13, -2, -5, 3, -8, -4, 13],

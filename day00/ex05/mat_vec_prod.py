@@ -2,15 +2,24 @@ import numpy as np
 from dot import dot
 
 def mat_vec_prod(x, y):
-	if x.size == 0 or y.size == 0:
-		return None
-	if x.shape[1] != y.shape[0]:
-		return None
+#	if x.size == 0 or y.size == 0:
+#		return None
+#	if x.shape[1] != y.shape[0]:
+#		return None
 
-	res_n = np.zeros((x.shape[0], 1))
+#	res_n = np.zeros((x.shape[0], 1))
+#	for i in range(0,x.shape[0]):
+#		res_n[i] = dot(x[i], y.reshape(y.shape[0]))
+#	return res_n
+
+	array = []
+		#print("here")
+		#res_n = np.zeros((x.shape[0], 1))
 	for i in range(0,x.shape[0]):
-		res_n[i] = dot(x[i], y.reshape(y.shape[0]))
-	return res_n
+		array2 = []
+		array2.append(dot(x[i], y.reshape(y.shape[0])))
+		array.append(array2)
+	return np.array(array)
 
 
 W = np.array([

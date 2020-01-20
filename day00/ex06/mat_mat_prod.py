@@ -2,26 +2,28 @@ import numpy as np
 from mat_vec_prod import mat_vec_prod
 from dot import dot
 
-
+#inverser entre x et y
 # M[deb_ligne : fin_ligne , deb_col : fin_col]
 def mat_mat_prod(x, y):
 	if x.size == 0 or y.size == 0:
 		return None
 	if x.shape[1] != y.shape[0]:
 		return None
-	#print(np.array(x[0:x.shape[1]], y[n][0:y.shape[1]]))
-	res_n = np.zeros((x.shape[0], y.shape[1]))
-	print(res_n)
-	buff_mat = np.zeros((x.shape[0],))
-	for i in range(0,x.shape[0]):
-		buff_mat[i] = x[i][0]
-		print(buff_mat)
-		for j in range(0,y.shape[0]):
-			print(y[j])
-	#print(res_n)
 
+	array = []
 
-# i = 0, j =
+	buff = []
+	for j in range(0,y.shape[0]):
+		buff_x = []
+		for i in range(0,x.shape[0]):
+			buff_x.append(x[i][j])
+		buff.append(buff_x)
+
+	for i in range(0, y.shape[0]):
+		array.append(mat_vec_prod(np.array(buff), y[i]))
+		#print (el * y[i])
+		#print (y)
+	return (np.array(array))
 
 W = np.array([
     [ -8, 8, -6, 14, 14, -9, -4],
@@ -41,6 +43,7 @@ Z = np.array([
 
 # res[0][0] = (-8, 2, -13, 2, 2) dot (-6, -1, -8, 7, -8)
 
-mat_mat_prod(W, Z)
+print(mat_mat_prod(W, Z))
+print(mat_mat_prod(Z,W))
 #mat_mat_prod(Z,W)
 # mat x[m] * y[i][p]
