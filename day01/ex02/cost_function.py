@@ -22,7 +22,7 @@ examples,1).
 	if len(y_hat) == 0 or Y.shape[0] != X.shape[0] or Y.shape[1] != 1:
 		print("dimensions incompatibles")
 		return None
-	print(y_hat)
+	#print(y_hat)
 	array = []
 	m = X.shape[0]
 	n = X.shape[1]
@@ -33,7 +33,11 @@ examples,1).
 	return np.array(array)
 
 def cost_(theta, X, Y):
-		return np.sum(cost_elem_(theta, X, Y))
+		cost_elem = cost_elem_(theta, X, Y)
+		res = 0
+		for el in cost_elem:
+			res += el
+		return float(res)
 
 
 #X1 = np.array([[0.], [1.], [2.], [3.], [4.]])
