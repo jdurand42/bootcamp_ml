@@ -19,11 +19,10 @@ class MyLinearRegression(object):
 		return np.array(array)
 
 	def cost_(self, X, Y):
-			return float(np.sum(self.cost_elem_(X, Y)))
-			#res = 0
-			#for el in cost_elem:
-			#	res += el
-			#return float(res)
+			res = 0
+			for el in self.cost_elem_(X, Y):
+				res += el
+			return float(res)
 
 	def predict_(self, X):
 		m = X.shape[0]
@@ -38,13 +37,35 @@ class MyLinearRegression(object):
 				array[i] = array[i] + self.theta[j] * X[i][j - 1]
 		return np.array(array)
 
-	def fit_(self, X, Y, alpha = 0.01, n_cycle = 2000):
+	def fit_(self, X, Y, alpha = 0.01, n_cycle = 2000, theta0_constant = False):
 		#previous_cost = 0
 		for i in range(0, n_cycle):
 		#	cost = self.cost_(X, Y)
 			pred = self.predict_(X)
 			D_theta1 = 1 / X.shape[0] * (alpha * np.sum((pred - Y) * X))
-			D_theta0 = 1 / X.shape[0] * (np.sum(pred - Y))
 			self.theta[1] = self.theta[1] - D_theta1
-			self.theta[0] = self.theta[0] - D_theta0
+			if theta0_constant == False:
+				D_theta0 = 1 / X.shape[0] * (np.sum(pred - Y))
+				self.theta[0] = self.theta[0] - D_theta0
 		return self.theta
+
+	def mean(self, x):
+		if x.size == 0 or isinstance(x, (np.ndarray, np.generic)) == False:
+			return None
+		#sumed = sum_(x)
+		res = 0
+		for el in x:
+			res += el
+		return res / x.size
+
+	def mse_(self, y, y_hat):
+		if y.size == 0 or isinstance(y, (np.ndarray, np.generic)) == False:
+			return None
+		if y_hat.size == 0 or isinstance(y_hat, (np.ndarray, np.generic)) == False:
+			return None
+		if y.shape != y_hat.shape:
+			return None
+		res_n = np.zeros(y.shape)
+		for i in range(y.size):
+			res_n[i] += (y_hat[i] - y[i])**2
+		return self.mean(res_n)
